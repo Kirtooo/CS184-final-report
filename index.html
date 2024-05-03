@@ -81,25 +81,42 @@
 
     <div class="container">
         <p class="team">Team: Xiaowen Liu, Alina Sheng, David Long, Leo Yuan</p>
-        <p class="team">Video: <a href="https://youtu.be/vlvq9pDjlzA">https://youtu.be/vlvq9pDjlzA</a></p>
+        <p class="team">Video: <a href="https://www.youtube.com/embed/UKt1wpBXjHA">https://www.youtube.com/embed/UKt1wpBXjHA</a></p>
 
         <section>
             <h2>Abstract</h2>
-            <p>This project developed a real-time visualization tool for simulating black holes using the principles of general relativity. Employing the Schwarzschild model, the tool renders scenes with high accuracy. We are able to generate images showcasing phenomena such as the accretion disk, doppler beaming, and photon rings. We also built an interactive interface for the real-time visualizer which shows the gravitational lensing effects of a black hole.</p>
+            <p>This project developed a real-time visualization tool for simulating black holes using the principles of general relativity. Employing the Schwarzschild model, the tool renders scenes with the gravitational lensing effect with high accuracy. We also built an interactive interface where users can change the viewing angles, textures, and their relative motion to the black hole.</p>
+            <!-- <p>This project developed a real-time visualization tool for simulating black holes using the principles of general relativity. Employing the Schwarzschild model, the tool renders scenes with high accuracy. We are able to generate images showcasing phenomena such as the accretion disk, doppler beaming, and photon rings. We also built an interactive interface for the real-time visualizer which shows the gravitational lensing effects of a black hole.</p> -->
         </section>
 
         <section>
             <h2>Technical Approach</h2>
-            <p>Our project focused on building a visualization tool from the ground up, leveraging WebGL for rendering and JavaScript for the interface. We aimed to simulate realistic gravitational lensing effects around black holes.</p>
+            <p>Our project focused on building a visualization tool from the ground up, leveraging WebGL for rendering and JavaScript for the interface. We implemented a ray-tracing algorithm that calculates light paths near a Schwarzschild black hole, taking into account the curvature of spacetime dictated by general relativity. To accommodate real-time rendering, we optimized these algorithms for performance, utilizing the GPU's parallel processing capabilities.</p>
+            <p>Specifically, we made three major improvements compared to the existing algorithms:</p>
+            <ul>
+                <li>Adaptive Grid</li>
+                <li>Spline Interpolation</li>
+                <li>GPU Acceleration</li>
+            </ul>
+            <p>Adaptive grids allow for dynamic adjustment of grid resolution based on the estimated error, enhancing efficiency in ray tracing by balancing the number of rays traced against interpolation errors, thereby optimizing computational resources and accuracy.</p>
+            <p>Spline Interpolation outperforms the bilinear method by following distortion curves more precisely and reducing errors in mapping pixels to polygons. Unlike bilinear interpolation, which only considers local cell distortions and can create discontinuities at cell borders, spline interpolation integrates information from neighboring cells, producing smoother transitions and reducing cumulative errors substantially, thus greatly enhancing image quality and interpolation accuracy.</p>
+            <img src="image/1.png" alt="Adaptive grid">
+            <figcaption align = "middle">Left: Adaptive grid with pixel positions in gray overlay; Middle, Linear interpolation; Right: Spline Interpolation. [1]</figcaption>
+            <img src="image/2.png" alt="spline">
+            <figcaption align = "middle">Left: Linear interpolation that causes the rendered image showing the adaptive grids; Right: Using Spline interpolation, we get a smoothie result. [1]</figcaption>
+            <p>With the use of the WebGL pipeline [2], GPU is employed to execute rendering tasks that are defined by the vertex and fragment shaders. These shaders, which run on the GPU, calculate the geometric transformations and pixel-specific visual effects, handling complex visual computations efficiently and rendering high-quality, interactive graphics in real-time directly within the web browser.</p>
+            <!-- <p>Our project focused on building a visualization tool from the ground up, leveraging WebGL for rendering and JavaScript for the interface. We aimed to simulate realistic gravitational lensing effects around black holes.</p>
             <p>We implemented a ray-tracing algorithm that calculates light paths near a Schwarzschild black hole, taking into account the curvature of spacetime dictated by general relativity. To accommodate real-time rendering, we optimized these algorithms for performance, utilizing the GPU's parallel processing capabilities through WebGL.</p>
             <p>We faced significant challenges related to numerical stability due to the intense gravitational fields simulated. To address these, we employed higher precision data types and refined our mathematical models for better stability in edge cases. Performance optimization was achieved by implementing more efficient data structures and reducing computational overhead in the shader programs.</p>
-            <p>Unlike many existing simulations that only focus on still images, our tool provides dynamic, real-time visualization. This required extensive optimization of the WebGL pipeline and careful management of memory and processing resources.</p>
+            <p>Unlike many existing simulations that only focus on still images, our tool provides dynamic, real-time visualization. This required extensive optimization of the WebGL pipeline and careful management of memory and processing resources.</p> -->
         </section>
 
         <section>
             <h2>Problems Encountered</h2>
             <ul>
                 <li>Floating Point Precision: Handling the extreme ranges of values near a black hole required adjustments to the standard WebGL floating point precision.</li>
+                <!-- <li>Floating Point Precision: Handling the extreme ranges of values near a black hole required adjustments to the standard WebGL floating point precision.</li> -->
+                <!-- <li>Performance Bottlenecks: Initially, our simulations struggled with performance due to complex calculations in the fragment shader. We resolved this by optimizing shader code and employing level-of-detail techniques for distant objects.</li> -->
                 <li>Performance Bottlenecks: Initially, our simulations struggled with performance due to complex calculations in the fragment shader. We resolved this by optimizing shader code and employing level-of-detail techniques for distant objects.</li>
             </ul>
         </section>
@@ -109,13 +126,17 @@
             <ul>
                 <li>Balancing Fidelity with Performance: We learned crucial strategies for balancing computational accuracy with the need for smooth, real-time performance in a graphical application.</li>
                 <li>GPU Utilization in Browsers: Mastering GPU utilization via WebGL opened new avenues for complex simulations that were previously thought unfeasible in browser environments.</li>
+                <!-- <li>Balancing Fidelity with Performance: We learned crucial strategies for balancing computational accuracy with the need for smooth, real-time performance in a graphical application.</li> -->
+                <!-- <li>GPU Utilization in Browsers: Mastering GPU utilization via WebGL opened new avenues for complex simulations that were previously thought unfeasible in browser environments.</li> -->
             </ul>
         </section>
 
         <section>
             <h2>Results</h2>
-            <p>Our final product successfully demonstrates a real-time, interactive visualization of a black hole surrounded by an accretion disk. Users can view the black hole from various angles and distances, observing the effects of gravitational lensing firsthand.</p>
-            <img src="image/out.png" alt="Black hole visualization">
+            <p>Our final product successfully demonstrates a real-time, interactive visualization of a black hole. Users can view the black hole from various angles and distances, observing the effects of gravitational lensing on different backgrounds.</p>
+            <iframe width="800" height="500" src="https://www.youtube.com/embed/bfm6iHgZrnQ?autoplay=1&mute=1"></iframe>
+            <!-- <p>Our final product successfully demonstrates a real-time, interactive visualization of a black hole surrounded by an accretion disk. Users can view the black hole from various angles and distances, observing the effects of gravitational lensing firsthand.</p> -->
+            <!-- <img src="image/out.png" alt="Black hole visualization"> -->
         </section>
 
         <section>
@@ -123,16 +144,27 @@
             <!-- <p>References to relevant literature and technical resources will go here.</p>
              -->
              <ul>
-                <!-- <li>Cuda C++ Programming Guide (https://docs.nvidia.com/cuda/cuda-c-programming-guide/)</li> -->
+                <li>A. Verbraeck and E. Eisemann. Interactive Black-Hole Visualization. IEEE Transactions on Visualization and Computer Graphics, VOL. 27, NO. 2, February 2021.</li>
+                <li>https://www.khronos.org/webgl/wiki/Main_Page</li>
                 <li>O. James, E. von Tunzelmann, P. Franklin, and K. S. Thorne. Gravitational lensing by spinning black holes in astrophysics, and in the movie Interstellar. Classical and Quantum Gravity, 32(6):1–41, Feb. 2015. doi: 10.1088/0264-9381/32/6/065001</li>
+                <li>https://rantonels.github.io/starless/</li>
                 <li>C. Chan, D. Psaltis, and F. Ozel. GRay: A massively parallel GPU-based ¨ code for ray tracing in relativistic spacetimes. The Astrophysical Journal, 777(1):1–9, Oct. 2013. doi: 10.1088/0004-637X/777/1/13</li>
                 <li>T. Muller. Image-based general-relativistic visualization. ¨ European Journal of Physics, 36(6):1–11, Nov. 2015. doi: 10.1088/0143-0807/36/6/ 065019</li>
                 <li>T. Muller and J. Frauendiener. Interactive visualization of a thin disc ¨ around a Schwarzschild black hole. European Journal of Physics, 33(4):955–963, Jul. 2012. doi: 10.1088/0143-0807/33/4/955</li>
+                <!-- <li>Cuda C++ Programming Guide (https://docs.nvidia.com/cuda/cuda-c-programming-guide/)</li> -->
+                <!-- <li>O. James, E. von Tunzelmann, P. Franklin, and K. S. Thorne. Gravitational lensing by spinning black holes in astrophysics, and in the movie Interstellar. Classical and Quantum Gravity, 32(6):1–41, Feb. 2015. doi: 10.1088/0264-9381/32/6/065001</li> -->
+                <!-- <li>C. Chan, D. Psaltis, and F. Ozel. GRay: A massively parallel GPU-based ¨ code for ray tracing in relativistic spacetimes. The Astrophysical Journal, 777(1):1–9, Oct. 2013. doi: 10.1088/0004-637X/777/1/13</li> -->
+                <!-- <li>T. Muller. Image-based general-relativistic visualization. ¨ European Journal of Physics, 36(6):1–11, Nov. 2015. doi: 10.1088/0143-0807/36/6/ 065019</li> -->
+                <!-- <li>T. Muller and J. Frauendiener. Interactive visualization of a thin disc ¨ around a Schwarzschild black hole. European Journal of Physics, 33(4):955–963, Jul. 2012. doi: 10.1088/0143-0807/33/4/955</li> -->
             </ul>
         </section>
 
         <section>
             <h2>Contributions</h2>
+            <p>Alina Sheng: literature review; codes for rendering, texture management, event handling, and WebGL setup; texture images; user interface; proposal, milestone and final report; presentation video and slides.</p>
+            <p>Xiaowen Liu: In the initial phase towards the milestone, I helped with ray-tracing simulations for visualizing gravitational lensing effects around black holes. We used Runge-Kutta methods to simulate light bending due to gravity. During the phase of real-time simulation, I focused on designing the GUI using HTML and JavaScript to create collapsible menus for customizing the texture and center.</p>
+            <p>Leo Yuan: proposal, milestone, final-report preparation and build up the webpage. Helped with changing and designing the user interface and webgl</p>
+            
             <!-- <p>Contributions by each team member can be outlined in this section.</p> -->
         </section>
     </div>
